@@ -1,0 +1,185 @@
+---
+title: "Classification"
+output:
+  html_document:
+    df_print: paged
+---
+
+## Name: Ryan Donaldson
+## Date: 02/13/2023
+
+### Summary
+Linear models predict which category a given input belongs to by creating a linear decision to separate different data classes from each other. The strength of linear models is that they can be used with large datasets and are easy to visualize and implement. The weakness of linear models is that they assume a linear relationship between the features and the target variable.
+
+Please click [here](https://www.kaggle.com/datasets/yasserh/uber-fares-dataset) to access the dataset used in this project.
+
+#### Data Cleaning
+Before exploring and visualizing data, let's clean our dataset to make our overall linear regression model easier to work with as well as compiling informative graphs later on.
+
+First, we will read the CSV and load the geosphere package so we can better work with latitude and longitude data that the columns will provide. We will also load the dplyr package to make column and row operations and mutations easier. We will load the e1071 package to build a Naive Bayes model and caret for useful distribution statistics.
+```{r}
+Uber <- read.csv("uber.csv", na.strings="NA", header=TRUE)
+if(!require("geosphere")) {
+  install.packages("geosphere")
+  library("geosphere")
+}
+if(!require("dplyr")) {
+  install.packages("dplyr")
+  library("dplyr", warn.conflicts=FALSE)
+}
+if(!require("e1071")) {
+  install.packages("e1071")
+  library("e1071", warn.conflicts=FALSE)
+}
+if(!require("caret")) {
+  install.packages("caret")
+  library("caret", warn.conflicts=FALSE)
+}
+```
+Let's remove any rows which contain any latitude or longitude outliers.
+```{r}
+exclude_pickup_lon <- filter(Uber, pickup_longitude < -360 
+         | pickup_longitude > 360
+         | pickup_longitude < -180
+         | pickup_longitude > 180)
+Uber <- anti_join(Uber, exclude_pickup_lon, by="key")
+
+exclude_dropoff_lon <- filter(Uber, dropoff_longitude < -360 
+         | dropoff_longitude > 360
+         | dropoff_longitude < -180
+         | dropoff_longitude > 180)
+Uber <- anti_join(Uber, exclude_dropoff_lon, by="key")
+
+exclude_pickup_lat <- filter(Uber, pickup_latitude < -90 
+         | pickup_latitude > 90)
+Uber <- anti_join(Uber, exclude_pickup_lat, by="key")
+
+exclude_dropoff_lat <- filter(Uber, dropoff_latitude < -90 
+         | dropoff_latitude > 90)
+Uber <- anti_join(Uber, exclude_dropoff_lat, by="key")
+```
+Now, let's mutate the data frame and add a new Distance column. Each row will have a value representing the shortest distance between its corresponding pickup and dropoff points. We will use the distHaversine function from geosphere for the math behind this. The `Distance_In_Km` will be represented in kilometers from the function output.
+```{r}
+print("Adding Distance column, please wait...")
+Uber <- Uber %>% rowwise() %>%
+  mutate(Distance_In_Km=distHaversine(c(pickup_longitude, pickup_latitude), c(dropoff_longitude, dropoff_latitude)))
+print("Uber dataframe has been mutated")
+```
+Now, we will divide the data into train and test sets using a 80/20 split.
+```{r}
+set.seed(1234)
+i <- sample(1:nrow(Uber), nrow(Uber)*0.80,
+replace=FALSE)
+train <- Uber[i,]
+test <- Uber[-i,]
+```
+
+#### Data Exploration
+Next, we will run 5 R functions for data exploration of the data set using the training data. First, let's run the str() function to get a look into the format of the data.
+```{r}
+str(train)
+```
+Next, let's gather an overall basic summary of each column of our training data.
+```{r}
+summary(train)
+```
+Our summary above tells us that exploring missing data is really not necessary considering the `dropoff_longitude` and `dropoff_latitude` columns each only contain 1 NA. So, first let's just look at the first few rows.
+```{r}
+head(train)
+```
+Now, let's look at the last few rows of our training data.
+```{r}
+tail(train)
+```
+Since we're dealing with over 200,000 records across 9 columns. Let's also explore the column names within our data set in case we need to reference them later when making predictions.
+```{r}
+names(train)
+```
+#### Data Visualization
+Let's create some informative graphs based on this training data, particuarly distributions of various columns since we're working with such a large dataset. First, let's get a sense of the distribution of ride distances.
+```{r}
+boxplot(train$Distance_In_Km, col="slategray", horizontal=TRUE, xlab="Distance", main="Distance of Rides")
+```
+Next, let's get a sense of the distribution of fare amounts.
+```{r}
+boxplot(train$fare_amount, col="slategray", horizontal=TRUE, xlab="Fare", main="Fare Amounts")
+```
+Next, let's get a sense of the distribution of passenger counts.
+```{r}
+boxplot(train$passenger_count, col="slategray", horizontal=TRUE, xlab="Number of Passengers", main="Passengers Per Ride")
+```
+After looking at the distribution among these columns, we've identified some outliers that would be best to remove. 
+
+We cannot have negative fare amounts, zero passengers, more than 6 passengers and more than 0 km traveled in order to accurately represent a ride. We also should remove large distances as well (let's say more than 50 miles) as well as large fare amounts (let's say more than 60 dollars).
+
+Let's further filter our Uber data set and then do a 80/20 split again.
+```{r}
+exclude_outliers <- filter(Uber, fare_amount < 0 
+         | fare_amount == 0
+         | fare_amount > 60
+         | passenger_count == 0
+         | passenger_count > 6
+         | Distance_In_Km == 0
+         | Distance_In_Km > 80)
+Uber <- anti_join(Uber, exclude_outliers, by="key")
+```
+Now, let's divide the new filtered data into train and test sets using a 80/20 split.
+```{r}
+set.seed(1234)
+i <- sample(1:nrow(Uber), nrow(Uber)*0.80,
+replace=FALSE)
+train <- Uber[i,]
+test <- Uber[-i,]
+```
+Now that we've removed outliers, let's see a histogram of the distance of rides.
+```{r}
+hist(train$Distance_In_Km)
+```
+Now let's see a histogram corresponding to fare amounts.
+```{r}
+hist(train$fare_amount)
+```
+### Logistic Regression
+Next, we will build a logistic regression model and output the summary.
+```{r}
+glm1 <- glm(as.factor(fare_amount)~Distance_In_Km, data=train, family=binomial)
+summary(glm1)
+```
+First, the median residual indicates that most residuals are close to zero. Second, the AIC measures the overall quality of the model where lower values indicate that the model is a good fit. We can see that the AIC has a low value of 17.886. With these two factors in mind, we can hypothesize that logistic regression might be a good fit for the data.
+
+### Naive Bayes
+Next, we will build a Naive Bayes model and output what the model learned.
+```{r}
+nb1 <- naiveBayes(fare_amount~Distance_In_Km, data=train)
+nb1
+```
+This output has given us various a priori probabilities and indicates that the model has found around 60 classes, each corresponding to a different, tiny probability. Because of this, the training data may appear scattered within most classes for the corresponding variables.
+
+### Prediction and Evaluation
+First, let's predict and evaluate on the test data of the logistic regression model.
+```{r}
+p1 <- predict(glm1, newdata=test, type="response")
+pred <- ifelse(p1 > 0.5, 1, 0)
+acc <- mean(p1==test$fare_amount)
+print(paste("accuracy =", acc))
+```
+Now, let's predict and evaluate on the test data of the Naive Bayes model.
+```{r}
+p2 <- predict(nb1, newdata=test, type="class")
+acc2 <- mean(p2==test$fare_amount)
+print(paste("accuracy =", acc2))
+```
+If we assume the logistic regression model had an accuracy of 1.0 compared to the 0.345 accuracies provided by the Naive Bayes model. Based on these accuracy numbers, the logistic regression model could correctly predict all test samples, especially since the mean of the `pred` variable was 1. The logistic regression model would be a better fit for the data. This might be because there is an approximately linear relationship between the features and target variable rather than independence between features assumed by the Naive Bayes model.
+
+### Naive Bayes vs Logistic Regression
+The strengths of Naive Bayes come from being useful for classification with a large dataset and independence between features. It works well with scattered data and can typically eliminate features that are not relevant to the prediction. However, its weaknesses fall under the fact that there might be a strong relationship between all the features, especially when there is not necessarily an independence between them. Logistic regression also finds its strengths in classification and a large dataset. It is easy to implement and visualize the impact of features on a target variable. However, there might only sometimes be a linear relationship among features. It only works well if there are a few outliers in the dataset so it may require further cleaning.
+
+#### Sources
+* https://dplyr.tidyverse.org/index.html
+* https://www.rdocumentation.org/packages/geosphere/versions/1.5-18
+* https://r4ds.had.co.nz/transform.html#transform
+* https://stackoverflow.com/questions/32363998/function-to-calculate-geospatial-distance-between-two-points-lat-long-using-r
+* https://stackoverflow.com/questions/40554592/geosphere-disthaversine-dplyr-error-wrong-length-for-vector-should-be-2
+* https://www.youtube.com/watch?v=MHbzCs05Luo
+* https://github.com/kjmazidi/Machine_Learning_2nd_edition/tree/master/Part_2_Linear_Models
+* http://www.sthda.com/english/articles/36-classification-methods-essentials/151-logistic-regression-essentials-in-r/

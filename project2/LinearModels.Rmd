@@ -1,0 +1,208 @@
+---
+title: "Linear Models Notebook"
+output: html_notebook
+---
+
+## Name: Ryan Donaldson
+## Date: 02/13/2023
+
+### Summary
+Linear regression is a statistical method used to find a relationship between predictor values, x, and target values y. The slope of the line and the intercept quantifies the amount that the target values change with respect to the predictor values. In other words, the line of best fit which will show an overall trend in the dataset and make accurate predictions. This can be interpreted as one strength of linear regression as the line of best fit can make the trend easy to interpret. It can also utilize multiple independent, or predictor, variables. However, linear regression does have its drawbacks in that any outliers can make it more difficult to understand the relationship along with variables that might not necessarily have a linear relationship.
+
+Please click [here](https://www.kaggle.com/datasets/yasserh/uber-fares-dataset) to access the dataset used in this project. We will use linear regression to predict the fare price of an Uber ride based on the pickup and dropoff location.
+
+#### Data Cleaning
+Before exploring and visualizing data, let's clean our dataset to make our overall linear regression model easier to work with as well as compiling informative graphs later on.
+
+First, we will read the CSV and load the geosphere package so we can better work with latitude and longitude data that the columns will provide. We will also load the dplyr package to make column and row operations and mutations easier.
+```{r}
+Uber <- read.csv("uber.csv", na.strings="NA", header=TRUE)
+if(!require("geosphere")) {
+  install.packages("geosphere")
+  library("geosphere")
+}
+if(!require("dplyr")) {
+  install.packages("dplyr")
+  library("dplyr", warn.conflicts=FALSE)
+}
+```
+Let's remove any rows which contain any latitude or longitude outliers.
+```{r}
+exclude_pickup_lon <- filter(Uber, pickup_longitude < -360 
+         | pickup_longitude > 360
+         | pickup_longitude < -180
+         | pickup_longitude > 180)
+Uber <- anti_join(Uber, exclude_pickup_lon, by="key")
+
+exclude_dropoff_lon <- filter(Uber, dropoff_longitude < -360 
+         | dropoff_longitude > 360
+         | dropoff_longitude < -180
+         | dropoff_longitude > 180)
+Uber <- anti_join(Uber, exclude_dropoff_lon, by="key")
+
+exclude_pickup_lat <- filter(Uber, pickup_latitude < -90 
+         | pickup_latitude > 90)
+Uber <- anti_join(Uber, exclude_pickup_lat, by="key")
+
+exclude_dropoff_lat <- filter(Uber, dropoff_latitude < -90 
+         | dropoff_latitude > 90)
+Uber <- anti_join(Uber, exclude_dropoff_lat, by="key")
+```
+Now, let's mutate the data frame and add a new Distance column. Each row will have a value representing the shortest distance between its corresponding pickup and dropoff points. We will use the distHaversine function from geosphere for the math behind this. The `Distance_In_Km` will be represented in kilometers from the function output.
+```{r}
+print("Adding Distance column, please wait...")
+Uber <- Uber %>% rowwise() %>%
+  mutate(Distance_In_Km=distHaversine(c(pickup_longitude, pickup_latitude), c(dropoff_longitude, dropoff_latitude)))
+print("Uber dataframe has been mutated")
+```
+Now, we will divide the data into train and test sets using a 80/20 split.
+```{r}
+set.seed(1234)
+i <- sample(1:nrow(Uber), nrow(Uber)*0.80,
+replace=FALSE)
+train <- Uber[i,]
+test <- Uber[-i,]
+```
+
+#### Data Exploration
+Next, we will run 5 R functions for data exploration of the data set using the training data. First, let's run the str() function to get a look into the format of the data.
+```{r}
+str(train)
+```
+Next, let's gather an overall basic summary of each column of our training data.
+```{r}
+summary(train)
+```
+Our summary above tells us that exploring missing data is really not necessary considering the `dropoff_longitude` and `dropoff_latitude` columns each only contain 1 NA. So, first let's just look at the first few rows.
+```{r}
+head(train)
+```
+Now, let's look at the last few rows of our training data.
+```{r}
+tail(train)
+```
+Since we're dealing with over 200,000 records across 9 columns. Let's also explore the column names within our data set in case we need to reference them later when making predictions.
+```{r}
+names(train)
+```
+#### Data Visualization
+Let's create some informative graphs based on this training data, particuarly distributions of various columns since we're working with such a large dataset. First, let's get a sense of the distribution of ride distances.
+```{r}
+boxplot(train$Distance_In_Km, col="slategray", horizontal=TRUE, xlab="Distance", main="Distance of Rides")
+```
+Next, let's get a sense of the distribution of fare amounts.
+```{r}
+boxplot(train$fare_amount, col="slategray", horizontal=TRUE, xlab="Fare", main="Fare Amounts")
+```
+Next, let's get a sense of the distribution of passenger counts.
+```{r}
+boxplot(train$passenger_count, col="slategray", horizontal=TRUE, xlab="Number of Passengers", main="Passengers Per Ride")
+```
+After looking at the distribution among these columns, we've identified some outliers that would be best to remove. 
+
+We cannot have negative fare amounts, zero passengers, more than 6 passengers and more than 0 km traveled in order to accurately represent a ride. We also should remove large distances as well (let's say more than 50 miles) as well as large fare amounts (let's say more than 60 dollars).
+
+Let's further filter our Uber data set and then do a 80/20 split again.
+```{r}
+exclude_outliers <- filter(Uber, fare_amount < 0 
+         | fare_amount == 0
+         | fare_amount > 60
+         | passenger_count == 0
+         | passenger_count > 6
+         | Distance_In_Km == 0
+         | Distance_In_Km > 80)
+Uber <- anti_join(Uber, exclude_outliers, by="key")
+```
+Now, let's divide the new filtered data into train and test sets using a 80/20 split.
+```{r}
+set.seed(1234)
+i <- sample(1:nrow(Uber), nrow(Uber)*0.80,
+replace=FALSE)
+train <- Uber[i,]
+test <- Uber[-i,]
+```
+Now that we've removed outliers, let's see a histogram of the distance of rides.
+```{r}
+hist(train$Distance_In_Km)
+```
+Now let's see a histogram corresponding to fare amounts.
+```{r}
+hist(train$fare_amount)
+```
+### Linear Regression
+Now, we will build a linear regression model and output the summary accordingly.
+```{r}
+lm1 <- lm(fare_amount~Distance_In_Km, data=train)
+summary(lm1)
+```
+Based on the information output from the summary, we see that the minimum residual value is -15.346 while the maximum residual value is 49.072. The residuals show a fairly wide range between the actual observed and the predicted values. The coefficient for Distance_In_Km is -0.13068, which shows a negative linear relationship between Distance_In_Km and the dependent variable, fare_amount, in our case. Based on this summary, the negative linear relationship and wide range of values show that the model may not fit this data well and more factors are needed to build an accurate model.
+
+### Residual Plots
+Next, we will predict target values, plot the residuals, and provide an explanation of what the plot tells us.
+```{r}
+par(mfrow=c(2,2))
+plot(lm1)
+```
+Based on the residual plots, we can confirm our observations from the model summary. We know that the line of perfect fit represents where the residuals are equal to zero, and the red lines indicate the confidence of how far off the predicted values are from our actual values. Because there are many points above and below the red lines, this model does not fit the data well, as the variance for the residuals is not constant on these plots. For example, in the Normal Q-Q plot, there are many points above the dashed line, which shows that these residual values are not expected among a normal distribution. Because there are many smaller and larger than expected residuals, some outliers or other factors are still affecting the model's accuracy.
+
+### Multiple Linear Regression
+So, let's try using a linear regression model now with multiple predictors and output the summary and residual plots.
+```{r}
+lm2 <- lm(fare_amount~Distance_In_Km+passenger_count, data=train)
+summary(lm2)
+```
+Let's output the residual plots.
+```{r}
+par(mfrow=c(2,2))
+plot(lm2)
+```
+### 3rd Linear Regression Model
+Let's build a third linear regression model to try and improve the results.
+```{r}
+lm3 <- lm(log(fare_amount)~Distance_In_Km+passenger_count, data=train)
+summary(lm3)
+```
+Let's output the residual plots.
+```{r}
+par(mfrow=c(2,2))
+plot(lm3)
+```
+### Result Comparison
+The third model is the best model after comparing the summary output and residual plots from all three models. The polynomial term in Distance_In_Km and the logarithmic transformation of fare_amount captures the nonlinear relationship between Distance_In_Km and fare_amount better than the other models. It also shows that passenger_count did not really affect fare_amount in any of the models. Overall, the third model appears to be the most appropriate when predicting fare_amount based on Distance_In_Km and passenger_count.
+
+### Prediction and Evaluation
+Now, we will predict and evaluate on the test data using metrics correlation and mse for the first model.
+```{r}
+pred1 <- predict(lm1, newdata=test)
+correlation1 <- cor(pred1, test$fare_amount)
+print(paste("correlation: ", correlation1))
+mse1 <- mean((pred - test$fare_amount)^2)
+print(paste("mse: ", mse1))
+```
+Next, we will predict and evaluate on the test data using metrics correlation and mse for the second model.
+```{r}
+pred2 <- predict(lm2, newdata=test)
+correlation2 <- cor(pred2, test$fare_amount)
+print(paste("correlation: ", correlation2))
+mse2 <- mean((pred - test$fare_amount)^2)
+print(paste("mse: ", mse2))
+```
+Finally, we will predict and evaluate on the test data using metrics correlation and mse for the third model.
+```{r}
+pred3 <- predict(lm3, newdata=test)
+correlation3 <- cor(pred3, test$fare_amount)
+print(paste("correlation: ", correlation3))
+mse3 <- mean((pred - test$fare_amount)^2)
+print(paste("mse: ", mse3))
+```
+Looking at the three outputs, we can see that all models have the same MSE value but different correlations. We know from class that a correlation coefficient close to 1 or -1 indicates a robust linear relationship between the variables, while a correlation closer to 0 indicates a weak relationship. The second model has a very high negative correlation, which differs from the first or third model. The high negative correlation might mean we are overfitting the data. The third model uses multiple linear and polynomial regression and has a better correlation than the first one. So, these results indicate that the third model gives the best result because it shows a better correlation coefficient while maintaining the same MSE as the other two models.
+
+#### Sources
+* https://dplyr.tidyverse.org/index.html
+* https://www.rdocumentation.org/packages/geosphere/versions/1.5-18
+* https://r4ds.had.co.nz/transform.html#transform
+* https://stackoverflow.com/questions/32363998/function-to-calculate-geospatial-distance-between-two-points-lat-long-using-r
+* https://stackoverflow.com/questions/40554592/geosphere-disthaversine-dplyr-error-wrong-length-for-vector-should-be-2
+* https://sebastiansauer.github.io/percentage_plot_ggplot2_V2/
+* https://www.youtube.com/watch?v=MHbzCs05Luo
+* https://github.com/kjmazidi/Machine_Learning_2nd_edition/tree/master/Part_2_Linear_Models

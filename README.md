@@ -7,3 +7,7 @@ This repository is utilized as a portfolio for CS 4375 machine learning assignme
 ## C++ Data Exploration
 * [Code](https://legitatx.github.io/CS4375_ML_Portfolio/project1/DataExploration/DataExploration/main.cpp)
 * [Writeup](https://legitatx.github.io/CS4375_ML_Portfolio/project1/Writeup.pdf)
+
+## Linear Models
+- [Regression](https://legitatx.github.io/CS4375_ML_Portfolio/project2/Regression.pdf)
+- [Classification](https://legitatx.github.io/CS4375_ML_Portfolio/project2/Classification.pdf)

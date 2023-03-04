@@ -127,39 +127,39 @@ double accuracy(const vector<int>& predicted, const vector<int>& actual) {
 
 double sensitivity(const vector<int>& predicted, const vector<int>& actual) {
     int length = static_cast<int>(predicted.size());
-    int true_positives = 0;
+    int predicted_positives = 0;
     int actual_positives = 0;
     for (int i = 0; i < length; i++) {
         if (actual[i] == 1) {
             actual_positives++;
             if (predicted[i] == 1) {
-                true_positives++;
+                predicted_positives++;
             }
         }
     }
     if (actual_positives == 0) {
         return 0.0;
     } else {
-        return static_cast<double>(true_positives) / actual_positives;
+        return static_cast<double>(predicted_positives) / actual_positives;
     }
 }
 
 double specificity(const vector<int>& predicted, const vector<int>& actual) {
     int length = static_cast<int>(predicted.size());
-    int true_negatives = 0;
+    int predicted_negatives = 0;
     int actual_negatives = 0;
     for (int i = 0; i < length; i++) {
         if (actual[i] == 0) {
             actual_negatives++;
             if (predicted[i] == 0) {
-                true_negatives++;
+                predicted_negatives++;
             }
         }
     }
     if (actual_negatives == 0) {
         return 0.0;
     } else {
-        return static_cast<double>(true_negatives) / actual_negatives;
+        return static_cast<double>(predicted_negatives) / actual_negatives;
     }
 }
 

@@ -107,60 +107,51 @@ public:
 };
 
 double accuracy(const vector<int>& predicted, const vector<int>& actual) {
-    int n = static_cast<int>(predicted.size());
-    if (n != static_cast<int>(actual.size())) {
-        throw invalid_argument("predicted and actual vectors must have the same size");
-    }
+    int length = static_cast<int>(predicted.size());
     int correct = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < length; i++) {
         if (predicted[i] == actual[i]) {
             correct++;
         }
     }
-    return static_cast<double>(correct) / n;
+    return static_cast<double>(correct) / length;
 }
 
 double sensitivity(const vector<int>& predicted, const vector<int>& actual) {
-    int n = static_cast<int>(predicted.size());
-    if (n != static_cast<int>(actual.size())) {
-        throw invalid_argument("predicted and actual vectors must have the same size");
-    }
-    int true_positives = 0;
+    int length = static_cast<int>(predicted.size());
+    int predicted_positives = 0;
     int actual_positives = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < length; i++) {
         if (actual[i] == 1) {
             actual_positives++;
             if (predicted[i] == 1) {
-                true_positives++;
+                predicted_positives++;
             }
         }
     }
     if (actual_positives == 0) {
         return 0.0;
     } else {
-        return static_cast<double>(true_positives) / actual_positives;
+        return static_cast<double>(predicted_positives) / actual_positives;
     }
 }
 
 double specificity(const vector<int>& predicted, const vector<int>& actual) {
-    int n = static_cast<int>(predicted.size());
-    if (n != static_cast<int>(actual.size())) {
-        throw invalid_argument("predicted and actual vectors must have the same size");
-    }
-    int true_negatives = 0;
+    int length = static_cast<int>(predicted.size());
+    int predicted_negatives = 0;
     int actual_negatives = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < length; i++) {
         if (actual[i] == 0) {
             actual_negatives++;
             if (predicted[i] == 0) {
-                true_negatives++;
+                predicted_negatives++;
             }
         }
     }
     if (actual_negatives == 0) {
         return 0.0;
     } else {
-        return static_cast<double>(true_negatives) / actual_negatives;
+        return static_cast<double>(predicted_negatives) / actual_negatives;
     }
 }
 
@@ -257,11 +248,11 @@ int main(int argc, const char * argv[]) {
     // use the remaining data to predict values
     vector<vector<double>> test_data(num_observations - train_size, vector<double>(3));
     vector<int> test_labels(num_observations - train_size);
-    for (int i = 800; i < num_observations; i++) {
-        test_data[i - 800][0] = age[i];
-        test_data[i - 800][1] = pclass[i];
-        test_data[i - 800][2] = sex[i];
-        test_labels[i - 800] = survived[i];
+    for (int obs = 800; obs < num_observations; obs++) {
+        test_data[obs - 800][0] = sex[obs];
+        test_data[obs - 800][1] = age[obs];
+        test_data[obs - 800][2] = pclass[obs];
+        test_labels[obs - 800] = survived[obs];
     }
     
     vector<int> predictions = nb->predict(test_data);

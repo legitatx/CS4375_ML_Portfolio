@@ -16,3 +16,6 @@ This repository is utilized as a portfolio for CS 4375 machine learning assignme
 * [Logistic Regression - Code](https://legitatx.github.io/CS4375_ML_Portfolio/project3/ml-algorithms-from-scratch/ml-algorithms-from-scratch/main.cpp)
 * [Naive Bayes - Code](https://legitatx.github.io/CS4375_ML_Portfolio/project3/ml-algorithms-from-scratch/ml-algorithms-from-scratch/naive_bayes.cpp)
 * [Writeup](https://legitatx.github.io/CS4375_ML_Portfolio/project3/ml-algorithms-from-scratch/ml-algorithms-from-scratch/Writeup.pdf)
+
+## Similarity and Ensemble
+* [Notebook 2 - Classification](https://legitatx.github.io/CS4375_ML_Portfolio/project4/ml-algorithms-from-scratch/similarity_pdf.pdf)

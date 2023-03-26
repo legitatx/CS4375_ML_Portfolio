@@ -1878,16 +1878,9 @@ tidy(glm1)</code></pre>
 </div>
 <p>Now, let’s run predictions on our data and verify the accuracy of the
 logistic regression model.</p>
-<pre class="r"><code>pred_class &lt;- predict(glm1,
-                      new_data = test,
-                      type = &quot;class&quot;)
-pred_proba &lt;- predict(glm1,
-                      new_data = test,
-                      type = &quot;prob&quot;)
-results &lt;- test %&gt;%
-           select(class) %&gt;%
-           bind_cols(pred_class, pred_proba)
-
+<pre class="r"><code>pred_class &lt;- predict(glm1, new_data = test, type = &quot;class&quot;)
+pred_probs &lt;- predict(glm1, new_data = test, type = &quot;prob&quot;)
+results &lt;- test %&gt;% select(class) %&gt;% bind_cols(pred_class, pred_probs)
 accuracy(results, truth = as.factor(class), estimate = .pred_class)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">

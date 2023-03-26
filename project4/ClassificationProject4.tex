@@ -1,0 +1,1081 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Classification},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Classification}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{name-ryan-donaldson}{%
+\subsection{Name: Ryan Donaldson}\label{name-ryan-donaldson}}
+
+\hypertarget{date-03202023}{%
+\subsection{Date: 03/20/2023}\label{date-03202023}}
+
+\hypertarget{dataset}{%
+\subsubsection{Dataset}\label{dataset}}
+
+Please click
+\href{https://www.kaggle.com/datasets/uciml/mushroom-classification}{here}
+to access the dataset used in this project.
+
+\hypertarget{train-and-test}{%
+\subsubsection{Train and Test}\label{train-and-test}}
+
+We will divide the data into train and test sets using a 80/20 split. We
+will also load the dplyr package to make column and row operations and
+mutations easier. We will also load the glmnet package to help build our
+logistic regression classification model. We will also load the
+tidymodels package so we can have a better output summary from the
+logistic regression model. We will load the class and gmodels packages
+for helping with the kNN regression. We will load the rpart packages to
+help with decision tree regression.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mushrooms }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"mushrooms.csv"}\NormalTok{, }\AttributeTok{na.strings=}\StringTok{"NA"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)) \{}
+  \FunctionTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
+  \FunctionTok{library}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\AttributeTok{warn.conflicts=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: dplyr
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"glmnet"}\NormalTok{)) \{}
+  \FunctionTok{install.packages}\NormalTok{(}\StringTok{"glmnet"}\NormalTok{)}
+  \FunctionTok{library}\NormalTok{(}\StringTok{"glmnet"}\NormalTok{, }\AttributeTok{warn.conflicts=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: glmnet
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: Matrix
+\end{verbatim}
+
+\begin{verbatim}
+## Loaded glmnet 4.1-7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"tidymodels"}\NormalTok{)) \{}
+  \FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidymodels"}\NormalTok{)}
+  \FunctionTok{library}\NormalTok{(}\StringTok{"tidymodels"}\NormalTok{, }\AttributeTok{warn.conflicts=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: tidymodels
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching packages -------------------------------------- tidymodels 1.0.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v broom        1.0.4     v rsample      1.1.1
+## v dials        1.1.0     v tibble       3.2.1
+## v ggplot2      3.4.1     v tidyr        1.3.0
+## v infer        1.0.4     v tune         1.0.1
+## v modeldata    1.1.0     v workflows    1.1.3
+## v parsnip      1.0.4     v workflowsets 1.0.0
+## v purrr        1.0.1     v yardstick    1.1.0
+## v recipes      1.0.5
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ----------------------------------------- tidymodels_conflicts() --
+## x purrr::discard()  masks scales::discard()
+## x tidyr::expand()   masks Matrix::expand()
+## x dplyr::filter()   masks stats::filter()
+## x dplyr::lag()      masks stats::lag()
+## x tidyr::pack()     masks Matrix::pack()
+## x recipes::step()   masks stats::step()
+## x tidyr::unpack()   masks Matrix::unpack()
+## x recipes::update() masks Matrix::update(), stats::update()
+## * Search for functions across packages at https://www.tidymodels.org/find/
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"class"}\NormalTok{)) \{}
+  \FunctionTok{install.packages}\NormalTok{(}\StringTok{"class"}\NormalTok{)}
+  \FunctionTok{library}\NormalTok{(}\StringTok{"class"}\NormalTok{, }\AttributeTok{warn.conflicts=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: class
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"gmodels"}\NormalTok{)) \{}
+  \FunctionTok{install.packages}\NormalTok{(}\StringTok{"gmodels"}\NormalTok{)}
+  \FunctionTok{library}\NormalTok{(}\StringTok{"gmodels"}\NormalTok{, }\AttributeTok{warn.conflicts=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: gmodels
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"rpart"}\NormalTok{)) \{}
+  \FunctionTok{install.packages}\NormalTok{(}\StringTok{"rpart"}\NormalTok{)}
+  \FunctionTok{library}\NormalTok{(}\StringTok{"rpart"}\NormalTok{, }\AttributeTok{warn.conflicts=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: rpart
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'rpart'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dials':
+## 
+##     prune
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"rpart.plot"}\NormalTok{)) \{}
+  \FunctionTok{install.packages}\NormalTok{(}\StringTok{"rpart.plot"}\NormalTok{)}
+  \FunctionTok{library}\NormalTok{(}\StringTok{"rpart.plot"}\NormalTok{, }\AttributeTok{warn.conflicts=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: rpart.plot
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{i }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(mushrooms), }\FunctionTok{nrow}\NormalTok{(mushrooms)}\SpecialCharTok{*}\FloatTok{0.80}\NormalTok{,}
+\AttributeTok{replace=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{train }\OtherTok{\textless{}{-}}\NormalTok{ mushrooms[i,]}
+\NormalTok{test }\OtherTok{\textless{}{-}}\NormalTok{ mushrooms[}\SpecialCharTok{{-}}\NormalTok{i,]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{statistical-data-exploration}{%
+\subsubsection{Statistical Data
+Exploration}\label{statistical-data-exploration}}
+
+Next, we will run 5 R functions for data exploration of the data set
+using the training data. First, let's run the str() function to get a
+look into the format of the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    6499 obs. of  23 variables:
+##  $ class                   : chr  "p" "e" "p" "e" ...
+##  $ cap.shape               : chr  "k" "k" "k" "k" ...
+##  $ cap.surface             : chr  "s" "f" "s" "f" ...
+##  $ cap.color               : chr  "n" "w" "n" "w" ...
+##  $ bruises                 : chr  "f" "f" "f" "f" ...
+##  $ odor                    : chr  "f" "n" "s" "n" ...
+##  $ gill.attachment         : chr  "f" "f" "f" "f" ...
+##  $ gill.spacing            : chr  "c" "w" "c" "w" ...
+##  $ gill.size               : chr  "n" "b" "n" "b" ...
+##  $ gill.color              : chr  "b" "p" "b" "g" ...
+##  $ stalk.shape             : chr  "t" "e" "t" "e" ...
+##  $ stalk.root              : chr  "?" "?" "?" "?" ...
+##  $ stalk.surface.above.ring: chr  "k" "k" "s" "s" ...
+##  $ stalk.surface.below.ring: chr  "k" "k" "s" "k" ...
+##  $ stalk.color.above.ring  : chr  "w" "w" "p" "w" ...
+##  $ stalk.color.below.ring  : chr  "w" "w" "w" "w" ...
+##  $ veil.type               : chr  "p" "p" "p" "p" ...
+##  $ veil.color              : chr  "w" "w" "w" "w" ...
+##  $ ring.number             : chr  "o" "t" "o" "t" ...
+##  $ ring.type               : chr  "e" "p" "e" "p" ...
+##  $ spore.print.color       : chr  "w" "w" "w" "w" ...
+##  $ population              : chr  "v" "s" "v" "s" ...
+##  $ habitat                 : chr  "p" "g" "d" "g" ...
+\end{verbatim}
+
+Next, let's gather an overall basic summary of each column of our
+training data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     class            cap.shape         cap.surface         cap.color        
+##  Length:6499        Length:6499        Length:6499        Length:6499       
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##    bruises              odor           gill.attachment    gill.spacing      
+##  Length:6499        Length:6499        Length:6499        Length:6499       
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##   gill.size          gill.color        stalk.shape         stalk.root       
+##  Length:6499        Length:6499        Length:6499        Length:6499       
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##  stalk.surface.above.ring stalk.surface.below.ring stalk.color.above.ring
+##  Length:6499              Length:6499              Length:6499           
+##  Class :character         Class :character         Class :character      
+##  Mode  :character         Mode  :character         Mode  :character      
+##  stalk.color.below.ring  veil.type          veil.color       
+##  Length:6499            Length:6499        Length:6499       
+##  Class :character       Class :character   Class :character  
+##  Mode  :character       Mode  :character   Mode  :character  
+##  ring.number         ring.type         spore.print.color   population       
+##  Length:6499        Length:6499        Length:6499        Length:6499       
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##    habitat         
+##  Length:6499       
+##  Class :character  
+##  Mode  :character
+\end{verbatim}
+
+So, first let's just look at the first few rows.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      class cap.shape cap.surface cap.color bruises odor gill.attachment
+## 7452     p         k           s         n       f    f               f
+## 8016     e         k           f         w       f    n               f
+## 7162     p         k           s         n       f    s               f
+## 8086     e         k           f         w       f    n               f
+## 7269     p         x           y         e       f    s               f
+## 1004     p         x           s         w       t    p               f
+##      gill.spacing gill.size gill.color stalk.shape stalk.root
+## 7452            c         n          b           t          ?
+## 8016            w         b          p           e          ?
+## 7162            c         n          b           t          ?
+## 8086            w         b          g           e          ?
+## 7269            c         n          b           t          ?
+## 1004            c         n          w           e          e
+##      stalk.surface.above.ring stalk.surface.below.ring stalk.color.above.ring
+## 7452                        k                        k                      w
+## 8016                        k                        k                      w
+## 7162                        s                        s                      p
+## 8086                        s                        k                      w
+## 7269                        k                        s                      p
+## 1004                        s                        s                      w
+##      stalk.color.below.ring veil.type veil.color ring.number ring.type
+## 7452                      w         p          w           o         e
+## 8016                      w         p          w           t         p
+## 7162                      w         p          w           o         e
+## 8086                      w         p          w           t         p
+## 7269                      p         p          w           o         e
+## 1004                      w         p          w           o         p
+##      spore.print.color population habitat
+## 7452                 w          v       p
+## 8016                 w          s       g
+## 7162                 w          v       d
+## 8086                 w          s       g
+## 7269                 w          v       d
+## 1004                 k          v       g
+\end{verbatim}
+
+Now, let's look at the last few rows of our training data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      class cap.shape cap.surface cap.color bruises odor gill.attachment
+## 8074     e         k           s         n       f    n               a
+## 6929     e         x           y         p       t    n               f
+## 2716     e         x           y         n       t    n               f
+## 7406     e         b           s         n       f    n               a
+## 888      e         f           y         y       t    a               f
+## 1556     p         f           s         n       t    p               f
+##      gill.spacing gill.size gill.color stalk.shape stalk.root
+## 8074            c         b          n           e          ?
+## 6929            c         b          w           e          b
+## 2716            c         b          p           t          b
+## 7406            c         b          n           e          ?
+## 888             c         b          n           e          r
+## 1556            c         n          w           e          e
+##      stalk.surface.above.ring stalk.surface.below.ring stalk.color.above.ring
+## 8074                        s                        s                      o
+## 6929                        s                        s                      w
+## 2716                        s                        s                      g
+## 7406                        s                        s                      o
+## 888                         s                        y                      w
+## 1556                        s                        s                      w
+##      stalk.color.below.ring veil.type veil.color ring.number ring.type
+## 8074                      o         p          n           o         p
+## 6929                      w         p          w           t         p
+## 2716                      w         p          w           o         p
+## 7406                      o         p          n           o         p
+## 888                       w         p          w           o         p
+## 1556                      w         p          w           o         p
+##      spore.print.color population habitat
+## 8074                 y          v       l
+## 6929                 w          y       p
+## 2716                 k          y       d
+## 7406                 y          v       l
+## 888                  n          y       g
+## 1556                 n          s       u
+\end{verbatim}
+
+Let's also explore the column names within our data set in case we need
+to reference them later when making predictions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "class"                    "cap.shape"               
+##  [3] "cap.surface"              "cap.color"               
+##  [5] "bruises"                  "odor"                    
+##  [7] "gill.attachment"          "gill.spacing"            
+##  [9] "gill.size"                "gill.color"              
+## [11] "stalk.shape"              "stalk.root"              
+## [13] "stalk.surface.above.ring" "stalk.surface.below.ring"
+## [15] "stalk.color.above.ring"   "stalk.color.below.ring"  
+## [17] "veil.type"                "veil.color"              
+## [19] "ring.number"              "ring.type"               
+## [21] "spore.print.color"        "population"              
+## [23] "habitat"
+\end{verbatim}
+
+\hypertarget{data-cleaning}{%
+\paragraph{Data Cleaning}\label{data-cleaning}}
+
+Before visualizing data, let's clean our dataset to make sure we can
+create the graphs and run the algorithms appropriately. We see as of
+right now we have characters representing the values of certain columns
+in the dataset. We will replace the various character values to a
+numeric factor except for the class column as this represents our target
+variable. Then, we will do an 80/20 split again.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new\_train\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sapply}\NormalTok{(train[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{23}\NormalTok{], }\ControlFlowTok{function}\NormalTok{ (new\_train\_df) }\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(new\_train\_df))))}
+\NormalTok{train }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(new\_train\_df, }\AttributeTok{class =}\NormalTok{ train}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{new\_test\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{sapply}\NormalTok{(test[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{23}\NormalTok{], }\ControlFlowTok{function}\NormalTok{ (new\_test\_df) }\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(new\_test\_df))))}
+\NormalTok{test }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(new\_test\_df, }\AttributeTok{class =}\NormalTok{ test}\SpecialCharTok{$}\NormalTok{class)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{graphical-data-exploration}{%
+\paragraph{Graphical Data
+Exploration}\label{graphical-data-exploration}}
+
+Let's create some informative graphs based on this training data,
+particuarly distributions of various columns since we're working with
+such a large dataset. First, let's get a sense of the distribution of
+the gill attachment, size, spacing, and color.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{gill.attachment, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Gill Attachment Type"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Gill Attachment Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{gill.size, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Gill Size Type"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Gill Size Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-8-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{gill.spacing, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Gill Spacing Type"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Gill Spacing Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-8-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{gill.color, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Gill Color Type"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Gill Color Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-8-4.pdf}
+Next, let's get a sense of the distribution of the stalk shape, root,
+surface above the ring, surface below the ring, color above the ring,
+and color below the ring.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{stalk.shape, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Stalk Shape Type"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Stalk Shape Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{stalk.root, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Stalk Root Type"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Stalk Root Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{stalk.surface.above.ring, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Type of Stalk\textquotesingle{}s Surface Above Ring"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Stalk Surface Above Ring Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-9-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{stalk.surface.below.ring, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Type of Stalk\textquotesingle{}s Surface Below Ring"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Stalk Surface Below Ring Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-9-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{stalk.color.above.ring, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Type of Stalk\textquotesingle{}s Color Above Ring"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Stalk Color Above Ring Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-9-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{stalk.color.below.ring, }\AttributeTok{col=}\StringTok{"slategray"}\NormalTok{, }\AttributeTok{horizontal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Type of Stalk\textquotesingle{}s Color Below Ring"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Stalk Color Below Ring Distribution"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-9-6.pdf}
+Next, let's see a histogram of the population type.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{population, }\AttributeTok{xlab=}\StringTok{"Population Type"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-10-1.pdf}
+Let's see a histogram of how many mushrooms were bruised in the dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{bruises, }\AttributeTok{xlab=}\StringTok{"Is Bruised"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-11-1.pdf}
+Now let's see a histogram corresponding to the habitats.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{habitat, }\AttributeTok{xlab=}\StringTok{"Habitat Type"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\hypertarget{logistic-regression}{%
+\subsubsection{Logistic Regression}\label{logistic-regression}}
+
+Next, we will build a logistic regression model and output the summary.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm1 }\OtherTok{\textless{}{-}} \FunctionTok{logistic\_reg}\NormalTok{(}\AttributeTok{mixture =} \FunctionTok{double}\NormalTok{(}\DecValTok{1}\NormalTok{), }\AttributeTok{penalty =} \FunctionTok{double}\NormalTok{(}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_engine}\NormalTok{(}\StringTok{"glmnet"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{fit}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(class) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ cap.shape }\SpecialCharTok{+}\NormalTok{ cap.surface }\SpecialCharTok{+}\NormalTok{ cap.color }\SpecialCharTok{+}\NormalTok{ bruises }\SpecialCharTok{+}\NormalTok{ odor }\SpecialCharTok{+}\NormalTok{ gill.attachment }\SpecialCharTok{+}\NormalTok{ gill.spacing }\SpecialCharTok{+}\NormalTok{ gill.size }\SpecialCharTok{+}\NormalTok{ gill.color }\SpecialCharTok{+}\NormalTok{ stalk.shape }\SpecialCharTok{+}\NormalTok{ stalk.root }\SpecialCharTok{+}\NormalTok{ stalk.surface.above.ring }\SpecialCharTok{+}\NormalTok{ stalk.surface.below.ring }\SpecialCharTok{+}\NormalTok{ stalk.color.above.ring }\SpecialCharTok{+}\NormalTok{ stalk.color.below.ring }\SpecialCharTok{+}\NormalTok{ veil.color }\SpecialCharTok{+}\NormalTok{ ring.number }\SpecialCharTok{+}\NormalTok{ ring.type }\SpecialCharTok{+}\NormalTok{ spore.print.color }\SpecialCharTok{+}\NormalTok{ population }\SpecialCharTok{+}\NormalTok{ habitat, }\AttributeTok{data=}\NormalTok{train)}
+\FunctionTok{tidy}\NormalTok{(glm1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 22 x 3
+##    term            estimate penalty
+##    <chr>              <dbl>   <dbl>
+##  1 (Intercept)       3.48         0
+##  2 cap.shape         0.0111       0
+##  3 cap.surface       0.193        0
+##  4 cap.color        -0.0119       0
+##  5 bruises          -0.974        0
+##  6 odor             -0.176        0
+##  7 gill.attachment   0.495        0
+##  8 gill.spacing     -2.05         0
+##  9 gill.size         2.39         0
+## 10 gill.color       -0.116        0
+## # ... with 12 more rows
+\end{verbatim}
+
+Now, let's run predictions on our data and verify the accuracy of the
+logistic regression model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred\_class }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(glm1,}
+                      \AttributeTok{new\_data =}\NormalTok{ test,}
+                      \AttributeTok{type =} \StringTok{"class"}\NormalTok{)}
+\NormalTok{pred\_proba }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(glm1,}
+                      \AttributeTok{new\_data =}\NormalTok{ test,}
+                      \AttributeTok{type =} \StringTok{"prob"}\NormalTok{)}
+\NormalTok{results }\OtherTok{\textless{}{-}}\NormalTok{ test }\SpecialCharTok{\%\textgreater{}\%}
+           \FunctionTok{select}\NormalTok{(class) }\SpecialCharTok{\%\textgreater{}\%}
+           \FunctionTok{bind\_cols}\NormalTok{(pred\_class, pred\_proba)}
+
+\FunctionTok{accuracy}\NormalTok{(results, }\AttributeTok{truth =} \FunctionTok{as.factor}\NormalTok{(class), }\AttributeTok{estimate =}\NormalTok{ .pred\_class)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   <chr>    <chr>          <dbl>
+## 1 accuracy binary         0.926
+\end{verbatim}
+
+\hypertarget{knn-regression}{%
+\subsubsection{kNN Regression}\label{knn-regression}}
+
+Next, we will build a kNN regression model. First, we will normalize the
+data and create a train and test label with the class target variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{normalize }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{ }\FunctionTok{return}\NormalTok{ ((x }\SpecialCharTok{{-}} \FunctionTok{min}\NormalTok{(x)) }\SpecialCharTok{/}\NormalTok{ (}\FunctionTok{max}\NormalTok{(x) }\SpecialCharTok{{-}} \FunctionTok{min}\NormalTok{(x))) \}}
+\NormalTok{knn\_train\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(new\_train\_df[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{22}\NormalTok{], normalize))}
+\NormalTok{knn\_train\_df }\OtherTok{\textless{}{-}}\NormalTok{ knn\_train\_df[}\SpecialCharTok{{-}}\DecValTok{16}\NormalTok{]}
+\NormalTok{knn\_test\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(new\_test\_df[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{22}\NormalTok{], normalize))}
+\NormalTok{knn\_test\_df }\OtherTok{\textless{}{-}}\NormalTok{ knn\_test\_df[}\SpecialCharTok{{-}}\DecValTok{16}\NormalTok{]}
+\NormalTok{knn\_train\_labels }\OtherTok{\textless{}{-}}\NormalTok{ mushrooms[i, }\DecValTok{1}\NormalTok{]}
+\NormalTok{knn\_test\_labels }\OtherTok{\textless{}{-}}\NormalTok{ mushrooms[}\SpecialCharTok{{-}}\NormalTok{i, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Now, we will train the model and check the accuracy of the predicted
+values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knn\_predictions }\OtherTok{\textless{}{-}} \FunctionTok{knn}\NormalTok{(}\AttributeTok{train=}\NormalTok{knn\_train\_df, }\AttributeTok{test=}\NormalTok{knn\_test\_df, }\AttributeTok{cl=}\NormalTok{knn\_train\_labels, }\AttributeTok{k=}\DecValTok{40}\NormalTok{)}
+\FunctionTok{CrossTable}\NormalTok{(}\AttributeTok{x=}\NormalTok{knn\_test\_labels, }\AttributeTok{y=}\NormalTok{knn\_predictions, }\AttributeTok{prop.chisq=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |           N / Col Total |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  1625 
+## 
+##  
+##                 | knn_predictions 
+## knn_test_labels |         e |         p | Row Total | 
+## ----------------|-----------|-----------|-----------|
+##               e |       829 |         2 |       831 | 
+##                 |     0.998 |     0.002 |     0.511 | 
+##                 |     0.999 |     0.003 |           | 
+##                 |     0.510 |     0.001 |           | 
+## ----------------|-----------|-----------|-----------|
+##               p |         1 |       793 |       794 | 
+##                 |     0.001 |     0.999 |     0.489 | 
+##                 |     0.001 |     0.997 |           | 
+##                 |     0.001 |     0.488 |           | 
+## ----------------|-----------|-----------|-----------|
+##    Column Total |       830 |       795 |      1625 | 
+##                 |     0.511 |     0.489 |           | 
+## ----------------|-----------|-----------|-----------|
+## 
+## 
+\end{verbatim}
+
+\hypertarget{decision-tree-regression}{%
+\subsubsection{Decision Tree
+Regression}\label{decision-tree-regression}}
+
+Next, we will build a decision tree regression model, plot the decision
+tree, and output the summary.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dtree }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(}\AttributeTok{formula=}\FunctionTok{as.factor}\NormalTok{(class) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ cap.shape }\SpecialCharTok{+}\NormalTok{ cap.surface }\SpecialCharTok{+}\NormalTok{ cap.color }\SpecialCharTok{+}\NormalTok{ bruises }\SpecialCharTok{+}\NormalTok{ odor }\SpecialCharTok{+}\NormalTok{ gill.attachment }\SpecialCharTok{+}\NormalTok{ gill.spacing }\SpecialCharTok{+}\NormalTok{ gill.size }\SpecialCharTok{+}\NormalTok{ gill.color }\SpecialCharTok{+}\NormalTok{ stalk.shape }\SpecialCharTok{+}\NormalTok{ stalk.root }\SpecialCharTok{+}\NormalTok{ stalk.surface.above.ring }\SpecialCharTok{+}\NormalTok{ stalk.surface.below.ring }\SpecialCharTok{+}\NormalTok{ stalk.color.above.ring }\SpecialCharTok{+}\NormalTok{ stalk.color.below.ring }\SpecialCharTok{+}\NormalTok{ veil.color }\SpecialCharTok{+}\NormalTok{ ring.number }\SpecialCharTok{+}\NormalTok{ ring.type }\SpecialCharTok{+}\NormalTok{ spore.print.color }\SpecialCharTok{+}\NormalTok{ population }\SpecialCharTok{+}\NormalTok{ habitat, }\AttributeTok{data=}\NormalTok{train, }\AttributeTok{method=}\StringTok{"anova"}\NormalTok{)}
+\FunctionTok{rpart.plot}\NormalTok{(dtree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ClassificationProject4_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(dtree)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Call:
+## rpart(formula = as.factor(class) ~ cap.shape + cap.surface + 
+##     cap.color + bruises + odor + gill.attachment + gill.spacing + 
+##     gill.size + gill.color + stalk.shape + stalk.root + stalk.surface.above.ring + 
+##     stalk.surface.below.ring + stalk.color.above.ring + stalk.color.below.ring + 
+##     veil.color + ring.number + ring.type + spore.print.color + 
+##     population + habitat, data = train, method = "anova")
+##   n= 6499 
+## 
+##            CP nsplit  rel error     xerror         xstd
+## 1  0.33847636      0 1.00000000 1.00025592 0.0009786708
+## 2  0.17911052      1 0.66152364 0.66185140 0.0116241597
+## 3  0.16584867      2 0.48241312 0.48284032 0.0103662974
+## 4  0.11958461      3 0.31656446 0.31688187 0.0107921921
+## 5  0.04070978      4 0.19697984 0.19746589 0.0083315869
+## 6  0.02652549      5 0.15627007 0.15670521 0.0074217978
+## 7  0.02152007      6 0.12974458 0.13008771 0.0074412833
+## 8  0.02064290      8 0.08670444 0.10311990 0.0070230605
+## 9  0.01726147      9 0.06606154 0.06623857 0.0061126293
+## 10 0.01119939     10 0.04880007 0.04896949 0.0052860623
+## 11 0.01004771     11 0.03760067 0.04636026 0.0051715733
+## 12 0.01000000     13 0.01750525 0.03250427 0.0043452488
+## 
+## Variable importance
+##        spore.print.color               gill.color                     odor 
+##                       15                       13                       11 
+##               stalk.root                ring.type                  bruises 
+##                       11                       10                        8 
+##               population                gill.size             gill.spacing 
+##                        7                        6                        4 
+##              ring.number   stalk.color.below.ring   stalk.color.above.ring 
+##                        3                        2                        2 
+##                  habitat stalk.surface.below.ring              stalk.shape 
+##                        2                        1                        1 
+##               veil.color                cap.color          gill.attachment 
+##                        1                        1                        1 
+##              cap.surface stalk.surface.above.ring 
+##                        1                        1 
+## 
+## Node number 1: 6499 observations,    complexity param=0.3384764
+##   mean=1.480382, MSE=0.2496151 
+##   left son=2 (3872 obs) right son=3 (2627 obs)
+##   Primary splits:
+##       gill.color < 4.5 to the right, improve=0.3384764, (0 missing)
+##       ring.type  < 4.5 to the right, improve=0.2940224, (0 missing)
+##       odor       < 3.5 to the right, improve=0.2883337, (0 missing)
+##       gill.size  < 1.5 to the left,  improve=0.2869113, (0 missing)
+##       bruises    < 1.5 to the right, improve=0.2513931, (0 missing)
+##   Surrogate splits:
+##       ring.type         < 3.5 to the right, agree=0.799, adj=0.503, (0 split)
+##       spore.print.color < 7.5 to the left,  agree=0.764, adj=0.416, (0 split)
+##       stalk.root        < 1.5 to the right, agree=0.760, adj=0.406, (0 split)
+##       bruises           < 1.5 to the right, agree=0.737, adj=0.349, (0 split)
+##       odor              < 7.5 to the left,  agree=0.734, adj=0.342, (0 split)
+## 
+## Node number 2: 3872 observations,    complexity param=0.1658487
+##   mean=1.240961, MSE=0.1828987 
+##   left son=4 (3292 obs) right son=5 (580 obs)
+##   Primary splits:
+##       spore.print.color        < 2.5 to the right, improve=0.3799124, (0 missing)
+##       odor                     < 3.5 to the right, improve=0.3375228, (0 missing)
+##       stalk.surface.above.ring < 2.5 to the right, improve=0.1816445, (0 missing)
+##       stalk.shape              < 1.5 to the right, improve=0.1674649, (0 missing)
+##       gill.size                < 1.5 to the left,  improve=0.1499810, (0 missing)
+##   Surrogate splits:
+##       stalk.surface.below.ring < 2.5 to the right, agree=0.885, adj=0.229, (0 split)
+##       stalk.color.below.ring   < 1.5 to the right, agree=0.883, adj=0.217, (0 split)
+##       stalk.color.above.ring   < 1.5 to the right, agree=0.880, adj=0.200, (0 split)
+##       odor                     < 3.5 to the right, agree=0.876, adj=0.174, (0 split)
+##       stalk.surface.above.ring < 2.5 to the right, agree=0.862, adj=0.079, (0 split)
+## 
+## Node number 3: 2627 observations,    complexity param=0.1791105
+##   mean=1.83327, MSE=0.1389312 
+##   left son=6 (474 obs) right son=7 (2153 obs)
+##   Primary splits:
+##       population   < 4.5 to the left,  improve=0.7961203, (0 missing)
+##       stalk.root   < 2.5 to the right, improve=0.5630634, (0 missing)
+##       gill.spacing < 1.5 to the right, improve=0.4478229, (0 missing)
+##       ring.number  < 2.5 to the right, improve=0.2910835, (0 missing)
+##       gill.color   < 1.5 to the right, improve=0.2131476, (0 missing)
+##   Surrogate splits:
+##       gill.spacing < 1.5 to the right, agree=0.910, adj=0.502, (0 split)
+##       stalk.root   < 2.5 to the right, agree=0.909, adj=0.494, (0 split)
+##       bruises      < 1.5 to the right, agree=0.882, adj=0.344, (0 split)
+##       ring.type    < 4   to the right, agree=0.879, adj=0.327, (0 split)
+##       ring.number  < 2.5 to the right, agree=0.876, adj=0.310, (0 split)
+## 
+## Node number 4: 3292 observations,    complexity param=0.1195846
+##   mean=1.130316, MSE=0.1133337 
+##   left son=8 (2750 obs) right son=9 (542 obs)
+##   Primary splits:
+##       gill.size              < 1.5 to the left,  improve=0.51996480, (0 missing)
+##       odor                   < 6.5 to the left,  improve=0.44779500, (0 missing)
+##       stalk.shape            < 1.5 to the right, improve=0.20478160, (0 missing)
+##       stalk.color.above.ring < 2.5 to the right, improve=0.05931233, (0 missing)
+##       stalk.color.below.ring < 2.5 to the right, improve=0.05931233, (0 missing)
+##   Surrogate splits:
+##       odor                   < 6.5 to the left,  agree=0.898, adj=0.382, (0 split)
+##       habitat                < 5.5 to the left,  agree=0.858, adj=0.138, (0 split)
+##       stalk.color.below.ring < 8.5 to the left,  agree=0.841, adj=0.035, (0 split)
+##       stalk.color.above.ring < 8.5 to the left,  agree=0.837, adj=0.011, (0 split)
+##       veil.color             < 3.5 to the left,  agree=0.837, adj=0.011, (0 split)
+## 
+## Node number 5: 580 observations,    complexity param=0.04070978
+##   mean=1.868966, MSE=0.1138644 
+##   left son=10 (76 obs) right son=11 (504 obs)
+##   Primary splits:
+##       odor              < 4.5 to the right, improve=1.0000000, (0 missing)
+##       stalk.root        < 1.5 to the left,  improve=1.0000000, (0 missing)
+##       gill.attachment   < 1.5 to the left,  improve=0.5177069, (0 missing)
+##       veil.color        < 2.5 to the left,  improve=0.5177069, (0 missing)
+##       spore.print.color < 1.5 to the left,  improve=0.5177069, (0 missing)
+##   Surrogate splits:
+##       stalk.root        < 1.5 to the left,  agree=1.000, adj=1.000, (0 split)
+##       gill.attachment   < 1.5 to the left,  agree=0.941, adj=0.553, (0 split)
+##       veil.color        < 2.5 to the left,  agree=0.941, adj=0.553, (0 split)
+##       spore.print.color < 1.5 to the left,  agree=0.941, adj=0.553, (0 split)
+##       gill.size         < 1.5 to the right, agree=0.928, adj=0.447, (0 split)
+## 
+## Node number 6: 474 observations,    complexity param=0.0206429
+##   mean=1.124473, MSE=0.1089792 
+##   left son=12 (434 obs) right son=13 (40 obs)
+##   Primary splits:
+##       spore.print.color < 2.5 to the right, improve=0.6482856, (0 missing)
+##       odor              < 3.5 to the right, improve=0.4760694, (0 missing)
+##       gill.size         < 1.5 to the left,  improve=0.2937232, (0 missing)
+##       habitat           < 1.5 to the right, improve=0.2937232, (0 missing)
+##       population        < 3.5 to the left,  improve=0.1613807, (0 missing)
+## 
+## Node number 7: 2153 observations
+##   mean=1.989317, MSE=0.01056865 
+## 
+## Node number 8: 2750 observations,    complexity param=0.01726147
+##   mean=1.022545, MSE=0.02203716 
+##   left son=16 (2721 obs) right son=17 (29 obs)
+##   Primary splits:
+##       stalk.color.above.ring < 2.5 to the right, improve=0.4620692, (0 missing)
+##       stalk.color.below.ring < 2.5 to the right, improve=0.4620692, (0 missing)
+##       ring.number            < 1.5 to the right, improve=0.4620692, (0 missing)
+##       spore.print.color      < 5.5 to the left,  improve=0.1434176, (0 missing)
+##       cap.color              < 2.5 to the right, improve=0.1281378, (0 missing)
+##   Surrogate splits:
+##       stalk.color.below.ring < 2.5 to the right, agree=1, adj=1, (0 split)
+##       ring.number            < 1.5 to the right, agree=1, adj=1, (0 split)
+## 
+## Node number 9: 542 observations,    complexity param=0.02652549
+##   mean=1.677122, MSE=0.2186279 
+##   left son=18 (80 obs) right son=19 (462 obs)
+##   Primary splits:
+##       stalk.shape  < 1.5 to the right, improve=0.3631416, (0 missing)
+##       odor         < 6.5 to the left,  improve=0.2946439, (0 missing)
+##       gill.spacing < 1.5 to the right, improve=0.2259592, (0 missing)
+##       population   < 4.5 to the right, improve=0.2216658, (0 missing)
+##       cap.surface  < 1.5 to the left,  improve=0.1891988, (0 missing)
+##   Surrogate splits:
+##       odor      < 1.5 to the left,  agree=0.934, adj=0.55, (0 split)
+##       cap.color < 9.5 to the right, agree=0.889, adj=0.25, (0 split)
+## 
+## Node number 10: 76 observations
+##   mean=1, MSE=0 
+## 
+## Node number 11: 504 observations
+##   mean=2, MSE=0 
+## 
+## Node number 12: 434 observations,    complexity param=0.01119939
+##   mean=1.043779, MSE=0.04186222 
+##   left son=24 (415 obs) right son=25 (19 obs)
+##   Primary splits:
+##       gill.size  < 1.5 to the left,  improve=1.00000000, (0 missing)
+##       habitat    < 1.5 to the right, improve=1.00000000, (0 missing)
+##       odor       < 3   to the right, improve=0.24218610, (0 missing)
+##       population < 3.5 to the left,  improve=0.06339203, (0 missing)
+##       stalk.root < 2.5 to the right, improve=0.06220534, (0 missing)
+##   Surrogate splits:
+##       habitat < 1.5 to the right, agree=1, adj=1, (0 split)
+## 
+## Node number 13: 40 observations
+##   mean=2, MSE=0 
+## 
+## Node number 16: 2721 observations,    complexity param=0.01004771
+##   mean=1.012128, MSE=0.01198081 
+##   left son=32 (2407 obs) right son=33 (314 obs)
+##   Primary splits:
+##       ring.number       < 2.5 to the left,  improve=0.09410899, (0 missing)
+##       cap.color         < 1.5 to the right, improve=0.08302279, (0 missing)
+##       spore.print.color < 5.5 to the left,  improve=0.08262416, (0 missing)
+##       stalk.shape       < 1.5 to the right, improve=0.02484003, (0 missing)
+##       cap.shape         < 2   to the right, improve=0.02187676, (0 missing)
+##   Surrogate splits:
+##       spore.print.color      < 5.5 to the left,  agree=0.986, adj=0.879, (0 split)
+##       stalk.root             < 1.5 to the right, agree=0.929, adj=0.382, (0 split)
+##       habitat                < 6   to the left,  agree=0.914, adj=0.252, (0 split)
+##       stalk.color.below.ring < 3.5 to the right, agree=0.899, adj=0.124, (0 split)
+##       cap.color              < 2.5 to the right, agree=0.898, adj=0.115, (0 split)
+## 
+## Node number 17: 29 observations
+##   mean=2, MSE=0 
+## 
+## Node number 18: 80 observations
+##   mean=1, MSE=0 
+## 
+## Node number 19: 462 observations,    complexity param=0.02152007
+##   mean=1.794372, MSE=0.163345 
+##   left son=38 (206 obs) right son=39 (256 obs)
+##   Primary splits:
+##       habitat                < 2.5 to the right, improve=0.3216846, (0 missing)
+##       population             < 5.5 to the right, improve=0.2492360, (0 missing)
+##       cap.surface            < 1.5 to the left,  improve=0.2451060, (0 missing)
+##       stalk.color.below.ring < 6.5 to the left,  improve=0.2391844, (0 missing)
+##       cap.color              < 5.5 to the left,  improve=0.2214307, (0 missing)
+##   Surrogate splits:
+##       odor       < 4   to the right, agree=0.710, adj=0.350, (0 split)
+##       stalk.root < 2.5 to the right, agree=0.667, adj=0.252, (0 split)
+##       cap.shape  < 5.5 to the left,  agree=0.660, adj=0.238, (0 split)
+##       cap.color  < 5.5 to the left,  agree=0.652, adj=0.218, (0 split)
+##       population < 5.5 to the right, agree=0.615, adj=0.136, (0 split)
+## 
+## Node number 24: 415 observations
+##   mean=1, MSE=0 
+## 
+## Node number 25: 19 observations
+##   mean=2, MSE=0 
+## 
+## Node number 32: 2407 observations
+##   mean=1, MSE=0 
+## 
+## Node number 33: 314 observations,    complexity param=0.01004771
+##   mean=1.105096, MSE=0.09405047 
+##   left son=66 (281 obs) right son=67 (33 obs)
+##   Primary splits:
+##       spore.print.color < 7   to the right, improve=1.0000000, (0 missing)
+##       stalk.root        < 1.5 to the left,  improve=0.3742349, (0 missing)
+##       population        < 4.5 to the left,  improve=0.3742349, (0 missing)
+##       cap.shape         < 3.5 to the right, improve=0.1577522, (0 missing)
+##       bruises           < 1.5 to the left,  improve=0.1440903, (0 missing)
+## 
+## Node number 38: 206 observations,    complexity param=0.02152007
+##   mean=1.538835, MSE=0.2484918 
+##   left son=76 (101 obs) right son=77 (105 obs)
+##   Primary splits:
+##       bruises     < 1.5 to the left,  improve=0.8897511, (0 missing)
+##       odor        < 6.5 to the left,  improve=0.7918666, (0 missing)
+##       cap.surface < 1.5 to the left,  improve=0.6413138, (0 missing)
+##       cap.color   < 7   to the left,  improve=0.3435068, (0 missing)
+##       population  < 4.5 to the right, improve=0.3195195, (0 missing)
+##   Surrogate splits:
+##       odor         < 6.5 to the left,  agree=0.971, adj=0.941, (0 split)
+##       cap.surface  < 1.5 to the left,  agree=0.864, adj=0.723, (0 split)
+##       cap.color    < 4.5 to the left,  agree=0.733, adj=0.455, (0 split)
+##       ring.type    < 3   to the left,  agree=0.733, adj=0.455, (0 split)
+##       gill.spacing < 1.5 to the right, agree=0.704, adj=0.396, (0 split)
+## 
+## Node number 39: 256 observations
+##   mean=2, MSE=0 
+## 
+## Node number 66: 281 observations
+##   mean=1, MSE=0 
+## 
+## Node number 67: 33 observations
+##   mean=2, MSE=0 
+## 
+## Node number 76: 101 observations
+##   mean=1.059406, MSE=0.05587687 
+## 
+## Node number 77: 105 observations
+##   mean=2, MSE=0
+\end{verbatim}
+
+\hypertarget{analysis}{%
+\subsubsection{Analysis}\label{analysis}}
+
+For the logistic regression model, we can see that the estimate column
+represents the coefficients for the predictor variables. The penalty
+column in the summary then represents if any regularization was applied
+to the model, which there was not. So the model could accurately predict
+around 93\% of the observations in the test set. For the kNN model, we
+are given a confusion matrix output where the diagonal areas represent
+the True Positive and True Negative predictions for the predicted
+labels. In contrast, the other areas represent False Positive and False
+Negative. The kNN model correctly predicted the e class 829 times (true
+positive) but had two false negatives. Using this data, we can calculate
+the accuracy with the equation (TP + TN) / (TP + TN + FP + FN), meaning
+the model had a 99.8\% accuracy. Finally, for the decision tree
+regression model, the summary tells us that the spore print color, gill
+color, stalk root, ring type, and odor were the best variables to
+predict the mushroom class type correctly. Let us look at the summary of
+node 1. We notice that many observations were made after splitting the
+left and right subtree but also had a high mean and mean squared error.
+This indicates that the model's accuracy might need to consider other
+factors.
+
+\hypertarget{sources}{%
+\subsubsection{Sources}\label{sources}}
+
+\url{https://www.kaggle.com/datasets/uciml/mushroom-classification}
+\url{https://www.datacamp.com/tutorial/logistic-regression-R}
+\url{https://www.kaggle.com/code/nicktp/mushroom-classification-with-r}
+\url{https://www.analyticsvidhya.com/blog/2015/08/learning-concept-knn-algorithms-programming/}
+\url{https://www.edureka.co/blog/knn-algorithm-in-r/}
+\url{https://www.datacamp.com/tutorial/decision-trees-R}
+\url{https://uc-r.github.io/regression_trees}
+
+\end{document}

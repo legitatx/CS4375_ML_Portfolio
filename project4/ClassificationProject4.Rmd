@@ -1,0 +1,169 @@
+---
+title: "Searching for Similarity -- Classification"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+## Name: Ryan Donaldson
+## Date: 03/20/2023
+
+### Dataset
+Please click [here](https://www.kaggle.com/datasets/uciml/mushroom-classification) to access the dataset used in this project.
+
+### Train and Test
+We will divide the data into train and test sets using a 80/20 split. We will also load the dplyr package to make column and row operations and mutations easier. We will also load the glmnet package to help build our logistic regression classification model. We will also load the tidymodels package so we can have a better output summary from the logistic regression model. We will load the class and gmodels packages for helping with the kNN regression. We will load the rpart packages to help with decision tree regression. 
+
+```{r}
+mushrooms <- read.csv("mushrooms.csv", na.strings="NA", header=TRUE)
+if(!require("dplyr")) {
+  install.packages("dplyr")
+  library("dplyr", warn.conflicts=FALSE)
+}
+if(!require("glmnet")) {
+  install.packages("glmnet")
+  library("glmnet", warn.conflicts=FALSE)
+}
+if(!require("tidymodels")) {
+  install.packages("tidymodels")
+  library("tidymodels", warn.conflicts=FALSE)
+}
+if(!require("class")) {
+  install.packages("class")
+  library("class", warn.conflicts=FALSE)
+}
+if(!require("gmodels")) {
+  install.packages("gmodels")
+  library("gmodels", warn.conflicts=FALSE)
+}
+if(!require("rpart")) {
+  install.packages("rpart")
+  library("rpart", warn.conflicts=FALSE)
+}
+if(!require("rpart.plot")) {
+  install.packages("rpart.plot")
+  library("rpart.plot", warn.conflicts=FALSE)
+}
+set.seed(1234)
+i <- sample(1:nrow(mushrooms), nrow(mushrooms)*0.80,
+replace=FALSE)
+train <- mushrooms[i,]
+test <- mushrooms[-i,]
+```
+
+### Statistical Data Exploration
+Next, we will run 5 R functions for data exploration of the data set using the training data. First, let's run the str() function to get a look into the format of the data.
+```{r}
+str(train)
+```
+Next, let's gather an overall basic summary of each column of our training data.
+```{r}
+summary(train)
+```
+So, first let's just look at the first few rows.
+```{r}
+head(train)
+```
+Now, let's look at the last few rows of our training data.
+```{r}
+tail(train)
+```
+Let's also explore the column names within our data set in case we need to reference them later when making predictions.
+```{r}
+names(train)
+```
+#### Data Cleaning
+Before visualizing data, let's clean our dataset to make sure we can create the graphs and run the algorithms appropriately. We see as of right now we have characters representing the values of certain columns in the dataset. We will replace the various character values to a numeric factor except for the class column as this represents our target variable. Then, we will do an 80/20 split again.
+```{r}
+new_train_df <- data.frame(sapply(train[2:23], function (new_train_df) as.numeric(as.factor(new_train_df))))
+train <- data.frame(new_train_df, class = train$class)
+new_test_df <- data.frame(sapply(test[2:23], function (new_test_df) as.numeric(as.factor(new_test_df))))
+test <- data.frame(new_test_df, class = test$class)
+```
+ 
+#### Graphical Data Exploration
+Let's create some informative graphs based on this training data, particuarly distributions of various columns since we're working with such a large dataset. First, let's get a sense of the distribution of the gill attachment, size, spacing, and color.
+```{r}
+boxplot(train$gill.attachment, col="slategray", horizontal=TRUE, xlab="Gill Attachment Type", main="Gill Attachment Distribution")
+boxplot(train$gill.size, col="slategray", horizontal=TRUE, xlab="Gill Size Type", main="Gill Size Distribution")
+boxplot(train$gill.spacing, col="slategray", horizontal=TRUE, xlab="Gill Spacing Type", main="Gill Spacing Distribution")
+boxplot(train$gill.color, col="slategray", horizontal=TRUE, xlab="Gill Color Type", main="Gill Color Distribution")
+```
+Next, let's get a sense of the distribution of the stalk shape, root, surface above the ring, surface below the ring, color above the ring, and color below the ring.
+```{r}
+boxplot(train$stalk.shape, col="slategray", horizontal=TRUE, xlab="Stalk Shape Type", main="Stalk Shape Distribution")
+boxplot(train$stalk.root, col="slategray", horizontal=TRUE, xlab="Stalk Root Type", main="Stalk Root Distribution")
+boxplot(train$stalk.surface.above.ring, col="slategray", horizontal=TRUE, xlab="Type of Stalk's Surface Above Ring", main="Stalk Surface Above Ring Distribution")
+boxplot(train$stalk.surface.below.ring, col="slategray", horizontal=TRUE, xlab="Type of Stalk's Surface Below Ring", main="Stalk Surface Below Ring Distribution")
+boxplot(train$stalk.color.above.ring, col="slategray", horizontal=TRUE, xlab="Type of Stalk's Color Above Ring", main="Stalk Color Above Ring Distribution")
+boxplot(train$stalk.color.below.ring, col="slategray", horizontal=TRUE, xlab="Type of Stalk's Color Below Ring", main="Stalk Color Below Ring Distribution")
+```
+Next, let's see a histogram of the population type.
+```{r}
+hist(train$population, xlab="Population Type")
+```
+Let's see a histogram of how many mushrooms were bruised in the dataset.
+```{r}
+hist(train$bruises, xlab="Is Bruised")
+```
+Now let's see a histogram corresponding to the habitats.
+```{r}
+hist(train$habitat, xlab="Habitat Type")
+```
+
+### Logistic Regression
+Next, we will build a logistic regression model and output the summary.
+```{r}
+glm1 <- logistic_reg(mixture = double(1), penalty = double(1)) %>% set_engine("glmnet") %>% fit(as.factor(class) ~ cap.shape + cap.surface + cap.color + bruises + odor + gill.attachment + gill.spacing + gill.size + gill.color + stalk.shape + stalk.root + stalk.surface.above.ring + stalk.surface.below.ring + stalk.color.above.ring + stalk.color.below.ring + veil.color + ring.number + ring.type + spore.print.color + population + habitat, data=train)
+tidy(glm1)
+```
+Now, let's run predictions on our data and verify the accuracy of the logistic regression model.
+```{r}
+pred_class <- predict(glm1,
+                      new_data = test,
+                      type = "class")
+pred_proba <- predict(glm1,
+                      new_data = test,
+                      type = "prob")
+results <- test %>%
+           select(class) %>%
+           bind_cols(pred_class, pred_proba)
+
+accuracy(results, truth = as.factor(class), estimate = .pred_class)
+```
+### kNN Regression
+Next, we will build a kNN regression model. First, we will normalize the data and create a train and test label with the class target variable.
+```{r}
+normalize <- function(x) { return ((x - min(x)) / (max(x) - min(x))) }
+knn_train_df <- data.frame(lapply(new_train_df[1:22], normalize))
+knn_train_df <- knn_train_df[-16]
+knn_test_df <- data.frame(lapply(new_test_df[1:22], normalize))
+knn_test_df <- knn_test_df[-16]
+knn_train_labels <- mushrooms[i, 1]
+knn_test_labels <- mushrooms[-i, 1]
+```
+Now, we will train the model and check the accuracy of the predicted values.
+```{r}
+knn_predictions <- knn(train=knn_train_df, test=knn_test_df, cl=knn_train_labels, k=40)
+CrossTable(x=knn_test_labels, y=knn_predictions, prop.chisq=FALSE)
+```
+
+### Decision Tree Regression
+Next, we will build a decision tree regression model, plot the decision tree, and output the summary.
+```{r}
+dtree <- rpart(formula=as.factor(class) ~ cap.shape + cap.surface + cap.color + bruises + odor + gill.attachment + gill.spacing + gill.size + gill.color + stalk.shape + stalk.root + stalk.surface.above.ring + stalk.surface.below.ring + stalk.color.above.ring + stalk.color.below.ring + veil.color + ring.number + ring.type + spore.print.color + population + habitat, data=train, method="anova")
+rpart.plot(dtree)
+summary(dtree)
+```
+### Analysis
+For the logistic regression model, we can see that the estimate column represents the coefficients for the predictor variables. The penalty column in the summary then represents if any regularization was applied to the model, which there was not. So the model could accurately predict around 93% of the observations in the test set. For the kNN model, we are given a confusion matrix output where the diagonal areas represent the True Positive and True Negative predictions for the predicted labels. In contrast, the other areas represent False Positive and False Negative. The kNN model correctly predicted the e class 829 times (true positive) but had two false negatives. Using this data, we can calculate the accuracy with the equation (TP + TN) / (TP + TN + FP + FN), meaning the model had a 99.8% accuracy. Finally, for the decision tree regression model, the summary tells us that the spore print color, gill color, stalk root, ring type, and odor were the best variables to predict the mushroom class type correctly. Let us look at the summary of node 1. We notice that many observations were made after splitting the left and right subtree but also had a high mean and mean squared error. This indicates that the model's accuracy might need to consider other factors.  
+
+### Sources
+https://www.kaggle.com/datasets/uciml/mushroom-classification
+https://www.datacamp.com/tutorial/logistic-regression-R
+https://www.kaggle.com/code/nicktp/mushroom-classification-with-r
+https://www.analyticsvidhya.com/blog/2015/08/learning-concept-knn-algorithms-programming/
+https://www.edureka.co/blog/knn-algorithm-in-r/
+https://www.datacamp.com/tutorial/decision-trees-R
+https://uc-r.github.io/regression_trees

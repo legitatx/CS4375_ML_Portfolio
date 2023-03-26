@@ -18,4 +18,4 @@ This repository is utilized as a portfolio for CS 4375 machine learning assignme
 * [Writeup](https://legitatx.github.io/CS4375_ML_Portfolio/project3/ml-algorithms-from-scratch/ml-algorithms-from-scratch/Writeup.pdf)
 
 ## Similarity and Ensemble
-* [Notebook 2 - Classification](https://legitatx.github.io/CS4375_ML_Portfolio/project4/similarity_pdf.pdf)
+* [Notebook 2 - Classification](https://legitatx.github.io/CS4375_ML_Portfolio/project4/notebook2.pdf)

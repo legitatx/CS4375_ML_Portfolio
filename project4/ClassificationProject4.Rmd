@@ -120,16 +120,9 @@ tidy(glm1)
 ```
 Now, let's run predictions on our data and verify the accuracy of the logistic regression model.
 ```{r}
-pred_class <- predict(glm1,
-                      new_data = test,
-                      type = "class")
-pred_proba <- predict(glm1,
-                      new_data = test,
-                      type = "prob")
-results <- test %>%
-           select(class) %>%
-           bind_cols(pred_class, pred_proba)
-
+pred_class <- predict(glm1, new_data = test, type = "class")
+pred_probs <- predict(glm1, new_data = test, type = "prob")
+results <- test %>% select(class) %>% bind_cols(pred_class, pred_probs)
 accuracy(results, truth = as.factor(class), estimate = .pred_class)
 ```
 ### kNN Regression

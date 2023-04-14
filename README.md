@@ -22,3 +22,6 @@ This repository is utilized as a portfolio for CS 4375 machine learning assignme
 
 ## ML with sklearn
 * [Code](https://legitatx.github.io/CS4375_ML_Portfolio/project5/project5.pdf)
+
+## Image Classification with DL
+* [Code](https://legitatx.github.io/CS4375_ML_Portfolio/project6/project6.pdf)

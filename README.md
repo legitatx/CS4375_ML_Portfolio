@@ -19,3 +19,6 @@ This repository is utilized as a portfolio for CS 4375 machine learning assignme
 
 ## Similarity and Ensemble
 * [Notebook 2 - Classification](https://legitatx.github.io/CS4375_ML_Portfolio/project4/notebook2.pdf)
+
+## ML with sklearn
+* [Code](https://legitatx.github.io/CS4375_ML_Portfolio/project5/project5.pdf)

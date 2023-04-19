@@ -1,5 +1,5 @@
 # CS 4375 - ML Portfolio
-This repository is utilized as a portfolio for CS 4375 machine learning assignments.
+This repository is utilized as a portfolio for CS 4375 machine learning assignments. You can view an overview of the contents of the portfolio [here](https://github.com/legitatx/CS4375_ML_Portfolio/blob/master/portfolio-overview.md).
 
 ## Portfolio Setup
 * [Overview of ML](https://legitatx.github.io/CS4375_ML_Portfolio/overview-of-ml.pdf)
